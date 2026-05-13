@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 /// <summary>
@@ -10,7 +11,10 @@ public class Projectile : MonoBehaviour
 {
     private Rigidbody2D rb;
     private float damage;
+    //public static bool doExplosion = false;
     private const float Lifetime = 6f; // 발사 후 자동 소멸 시간 (초)
+    [SerializeField] private GameObject explosion;
+
 
     void Awake()
     {
@@ -21,6 +25,7 @@ public class Projectile : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic;
 
         GetComponent<CircleCollider2D>().isTrigger = true;
+        explosion.gameObject.SetActive(false);
     }
 
     /// <summary>생성 직후 방향과 데미지를 초기화</summary>
@@ -38,11 +43,19 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Enemy enemy = col.GetComponent<Enemy>();
-        if (enemy != null)
+        if(PlayerStats.level < 3)
         {
-            enemy.TakeDamage(damage);
+            Enemy enemy = col.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+        }
+        if(PlayerStats.level >= 3)
+        {
             Destroy(gameObject);
+            explosion.gameObject.SetActive(true);
         }
     }
 }

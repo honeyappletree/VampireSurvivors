@@ -38,7 +38,7 @@ public class LevelUpPanel : MonoBehaviour
         gameObject.SetActive(true);
 
         if (headerText != null && PlayerStats.Instance != null)
-            headerText.text = $"레벨 {PlayerStats.Instance.level} 달성!\n무기를 선택하세요";
+            headerText.text = $"레벨 {PlayerStats.level} 달성!\n무기를 선택하세요";
 
         var sm = WeaponSlotManager.Instance;
 

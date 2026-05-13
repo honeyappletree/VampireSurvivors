@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
             _isDead  = true;
             _moveDir = Vector2.zero;
             _anim.SetBool("isMoving", false);
-            _anim.SetBool("isDead",   true);
             return;
         }
 

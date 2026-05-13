@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 
 /// <summary>
 /// 언데드 적 AI
@@ -38,6 +39,7 @@ public class Enemy : MonoBehaviour
     private bool            initialized = false;
     private Animator        _anim;
     private SpriteRenderer  _sr;
+    bool isDead;
 
     void Awake()
     {
@@ -72,7 +74,7 @@ public class Enemy : MonoBehaviour
         float waveMultiplier = 1f + wave * 0.15f;
         maxLifeTime     *= waveMultiplier;
         currentLifeTime  = maxLifeTime;
-        moveSpeed       += wave * 0.1f;
+        moveSpeed       += wave * 0.04f;
         initialized      = true;
     }
 
@@ -88,6 +90,12 @@ public class Enemy : MonoBehaviour
         {
             if (PlayerStats.Instance != null)
                 player = PlayerStats.Instance.transform;
+            return;
+        }
+
+        if (isDead == true)
+        {
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
@@ -107,13 +115,20 @@ public class Enemy : MonoBehaviour
     {
         currentLifeTime -= damage;
         if (currentLifeTime <= 0f)
+        {
+            isDead = true;
             Die();
+        }
     }
 
     void OnTriggerStay2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
+        {
             PlayerStats.Instance?.TakeDamage(contactDamagePerSec * Time.fixedDeltaTime);
+            Debug.Log("플레이어와 충돌");
+        }
+        
     }
 
     void Die()
@@ -130,10 +145,13 @@ public class Enemy : MonoBehaviour
             orb.GetComponent<BlackManaOrb>()?.Init(dropHealAmount);
         }
 
-        if (_anim != null)
-            _anim.SetBool("isDead", true);
+        if (_anim != null && isDead == true)
+        {
+            _anim.SetTrigger("doDead");
+            rb.linearVelocity = Vector2.zero;
+        }
 
-        StartCoroutine(DestroyAfterDeath(1.5f));
+        StartCoroutine(DestroyAfterDeath(2f));
     }
 
     IEnumerator DestroyAfterDeath(float delay)

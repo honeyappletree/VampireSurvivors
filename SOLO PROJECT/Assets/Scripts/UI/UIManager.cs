@@ -117,7 +117,7 @@ public class UIManager : MonoBehaviour
     void UpdateXPUI()
     {
         if (levelText != null)
-            levelText.text = $"레벨 {PlayerStats.Instance.level}";
+            levelText.text = $"레벨 {PlayerStats.level}";
 
         if (xpSlider != null)
             xpSlider.value = PlayerStats.Instance.currentXP / PlayerStats.Instance.xpToNextLevel;
@@ -164,6 +164,6 @@ public class UIManager : MonoBehaviour
         gameOverPanel?.SetActive(true);
 
         if (gameOverLevelText != null && PlayerStats.Instance != null)
-            gameOverLevelText.text = $"Lv.{PlayerStats.Instance.level} 도달\n생존 시간이 끝났습니다.";
+            gameOverLevelText.text = $"Lv.{PlayerStats.level} 도달\n생존 시간이 끝났습니다.";
     }
 }

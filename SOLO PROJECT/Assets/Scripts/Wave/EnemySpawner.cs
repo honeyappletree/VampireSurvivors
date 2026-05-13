@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -34,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
     private float continuousTimer;
     private float gameTimer;
     private bool bossSpawned = false;
+    bool enemySpawned = false;
 
     void Start()
     {
@@ -116,19 +118,28 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemies(int count, int wave)
     {
+        count = 60;
+        enemySpawned = true;
         if (PlayerStats.Instance == null) return;
         Vector2 playerPos = PlayerStats.Instance.transform.position;
 
         for (int i = 0; i < count; i++)
         {
-            float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
-            float dist = spawnRadius + Random.Range(0f, spawnRadiusVariance);
-            Vector2 spawnPos = playerPos + new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * dist;
+            // 각도 계산
+            float angle = i * Mathf.PI * 2f / count;
+
+            // 원형 위치 계산
+            float x = Mathf.Cos(angle) * spawnRadius;
+            float y = Mathf.Sin(angle) * spawnRadius;
+
+            Vector3 spawnPos = PlayerStats.Instance.transform.position + new Vector3(x, y, 0);
 
             GameObject obj = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
             Enemy enemy = obj.GetComponent<Enemy>();
             enemy?.Init(wave);
         }
+
+        Destroy(enemyPrefab, 30f);
     }
 
 #if UNITY_EDITOR

@@ -74,8 +74,8 @@ public class GameManager : MonoBehaviour
         LastResult = new GameResultData
         {
             survivalTime = survivalTimer,
-            killCount    = ps != null ? ps.killCount : 0,
-            maxLevel     = ps != null ? ps.level     : 1,
+            killCount    = ps != null ? PlayerStats.killCount : 0,
+            maxLevel     = ps != null ? PlayerStats.level     : 1,
             currency     = Mathf.FloorToInt(survivalTimer)
         };
 

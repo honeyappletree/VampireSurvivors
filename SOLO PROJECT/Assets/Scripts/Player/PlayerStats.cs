@@ -25,7 +25,7 @@ public class PlayerStats : MonoBehaviour
     [Header("레벨 / 경험치")]
     public float xpToNextLevel = 50f;
     public float xpScaleFactor = 1.4f;          // 레벨당 필요 경험치 배수
-    [HideInInspector] public int level = 1;
+    public static int level = 1;
     [HideInInspector] public float currentXP;
 
     // ── 이동 / 공격 스탯 ──────────────────────────────────────
@@ -38,7 +38,7 @@ public class PlayerStats : MonoBehaviour
     public float projectileSpeed = 8f;
 
     // ── 처치 수 ───────────────────────────────────────────────
-    [HideInInspector] public int killCount;
+    public static int killCount;
 
     // ── 이벤트 ────────────────────────────────────────────────
     public event Action<int> OnLevelUp;
@@ -67,6 +67,7 @@ public class PlayerStats : MonoBehaviour
 
         // 생명 유지 시간 지속 감소
         currentLifeTime -= lifeTimeDecreaseRate * Time.deltaTime;
+        Debug.Log("player의 currentTime: " + currentLifeTime);
         if (currentLifeTime <= 0f)
         {
             currentLifeTime = 0f;
@@ -101,12 +102,14 @@ public class PlayerStats : MonoBehaviour
     {
         if (invincibleTimer > 0f) return;
         currentLifeTime -= damage;
+        Debug.Log("플레이어가 입은 데미지: " + damage);
         invincibleTimer = invincibleDuration;
         if (_hitFlash != null) _hitFlash.TriggerFlash();
 
         if (currentLifeTime <= 0f)
         {
             currentLifeTime = 0f;
+            Debug.Log("GameOver!");
             GameManager.Instance.TriggerGameOver();
         }
     }
@@ -122,6 +125,10 @@ public class PlayerStats : MonoBehaviour
             level++;
             OnLevelUp?.Invoke(level);
             GameManager.Instance.TriggerLevelUp();
+        }
+        if(level >= 3)
+        {
+            
         }
     }
 
