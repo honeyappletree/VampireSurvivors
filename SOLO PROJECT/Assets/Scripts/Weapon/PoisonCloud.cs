@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// MVP 무기 2 : 직선 관통 투사체
+/// MVP 무기 2 : Poison Cloud
 /// - 가장 가까운 적 방향으로 직선 발사, 최대 N적을 관통
 /// - 기존 AutoAttack + Projectile 구조와 동일한 패턴으로 구현
 /// - 발사체(PiercingProjectile)는 동일 파일에 정의
 ///
 /// 레벨업 수치
-///   Lv.1 : 데미지 20, 관통 3적
-///   Lv.2 : 데미지 28, 관통 4적
-///   Lv.3 : 데미지 38, 관통 5적
+///   Lv.1 : 데미지 8, 관통 3적
+///   Lv.2 : 데미지 12, 관통 4적
+///   Lv.3 : 데미지 18, 관통 5적
 /// </summary>
-public class PiercingBolt : WeaponBase
+public class PoisonCloud : WeaponBase
 {
     [Header("관통 볼트 설정")]
     [SerializeField] private float projectileSpeed  = 10f;
@@ -20,10 +20,10 @@ public class PiercingBolt : WeaponBase
     [SerializeField] private float colliderRadius   = 0.2f;
 
     [Header("레벨별 수치")]
-    [SerializeField] private float[] damageLevels = { 20f, 28f, 38f };
-    [SerializeField] private int[]   pierceLevels = { 3, 4, 5 };
+    [SerializeField] private float[] damageLevels = { 8f, 12f, 18f }; //레벨업 수치별 데미지
+    [SerializeField] private int[]   pierceLevels = { 3, 4, 5 }; //레벨업 수치별 관통 수
 
-    public override string WeaponName => "관통 볼트";
+    public override string WeaponName => "Poison Cloud";
 
     // ── 라이프사이클 ──────────────────────────────────────────
 

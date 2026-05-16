@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         if (slot == null)
             slot = FindObjectOfType<WeaponSlotManager>();
         if (slot != null)
-            slot.AddWeapon(typeof(RotatingOrb));
+            slot.AddWeapon(typeof(DarkBolt));
     }
 
     void Update()

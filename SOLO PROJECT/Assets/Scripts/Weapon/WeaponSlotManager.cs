@@ -8,18 +8,18 @@ using UnityEngine;
 /// - 슬롯 꽉 참: 경고 로그 출력 후 슬롯[0] 교체 (추후 교체 선택 UI로 대체)
 ///
 /// [Inspector 연결 필수]
-/// - rotatingOrbPrefab  : RotatingOrb 컴포넌트가 붙은 프리팹
-/// - piercingBoltPrefab : PiercingBolt 컴포넌트가 붙은 프리팹
-/// - homingMissilePrefab: HomingMissile 컴포넌트가 붙은 프리팹
+/// - darkBoltPrefab  : DarkBolt 컴포넌트가 붙은 프리팹
+/// - poisonCloudPrefab : PoisonCloud 컴포넌트가 붙은 프리팹
+/// - collapseEdgePrefab: CollapseEdge 컴포넌트가 붙은 프리팹
 /// </summary>
 public class WeaponSlotManager : MonoBehaviour
 {
     public static WeaponSlotManager Instance { get; private set; }
 
     [Header("무기 프리팹 (Inspector에서 연결)")]
-    [SerializeField] private RotatingOrb   rotatingOrbPrefab;
-    [SerializeField] private PiercingBolt  piercingBoltPrefab;
-    [SerializeField] private HomingMissile homingMissilePrefab;
+    [SerializeField] private DarkBolt darkBoltPrefab; //다크 볼트
+    [SerializeField] private PoisonCloud poisonCloudPrefab; //Poison Cloud
+    [SerializeField] private CollapseEdge collapseEdgePrefab; //Collapse Edge
 
     [Header("슬롯 설정")]
     [SerializeField] private int maxSlots = 3;
@@ -55,19 +55,19 @@ public class WeaponSlotManager : MonoBehaviour
         }
 
         LevelUpPanel.Instance.RegisterAbility(
-            "회전 오브",
-            "플레이어 주변을 공전하며 닿는 적에게 피해\n데미지 15 / 발동 0.5초",
-            () => AcquireOrLevelUp(rotatingOrbPrefab)
+            "Dark Bolt",
+            "플레이어 주변을 공전하며 닿는 적에게 피해\n데미지 20 / 발동 0.5초",
+            () => AcquireOrLevelUp(darkBoltPrefab)
         );
         LevelUpPanel.Instance.RegisterAbility(
-            "관통 볼트",
-            "적을 최대 3명 관통하는 직선 투사체 발사\n데미지 20 / 발동 1.0초",
-            () => AcquireOrLevelUp(piercingBoltPrefab)
+            "Poison Cloud",
+            "플레이어 위치에 독가스를 방출해 범위 내 적에게 지속 독 피해 부여\n데미지 8 / 발동 1.0초",
+            () => AcquireOrLevelUp(poisonCloudPrefab)
         );
         LevelUpPanel.Instance.RegisterAbility(
-            "유도 미사일",
-            "가장 가까운 적을 추적하는 미사일 발사\n데미지 25 / 발동 1.5초",
-            () => AcquireOrLevelUp(homingMissilePrefab)
+            "Collapse Edge",
+            "가장 가까운 적을 추적하는 미사일 발사\n데미지 30 / 발동 1.5초",
+            () => AcquireOrLevelUp(collapseEdgePrefab)
         );
     }
 

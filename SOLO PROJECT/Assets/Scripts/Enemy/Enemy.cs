@@ -121,12 +121,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Player"))
         {
-            PlayerStats.Instance?.TakeDamage(contactDamagePerSec * Time.fixedDeltaTime);
+            PlayerStats.Instance?.TakeDamage(1);
             Debug.Log("플레이어와 충돌");
+            Debug.Log("player의 hp" + PlayerStats.Instance.currentLifeTime);
         }
         
     }
@@ -136,13 +137,19 @@ public class Enemy : MonoBehaviour
         PlayerStats.Instance?.AddKill();
         PlayerStats.Instance?.AddTimeReward(timeReward);
 
-        if (xpOrbPrefab != null)
-            Object.Instantiate(xpOrbPrefab, transform.position, Quaternion.identity);
-
-        if (blackManaPrefab != null)
+        if(PlayerStats.Instance.currentLifeTime < PlayerStats.Instance.maxLifeTimeCap)
         {
-            var orb = Object.Instantiate(blackManaPrefab, transform.position, Quaternion.identity);
-            orb.GetComponent<BlackManaOrb>()?.Init(dropHealAmount);
+            if (blackManaPrefab != null)
+            {
+                var orb = Object.Instantiate(blackManaPrefab, transform.position, Quaternion.identity);
+                orb.GetComponent<BlackManaOrb>()?.Init(dropHealAmount);
+                Debug.Log("black mana를 얻고 회복되었습니다.");
+            }
+        }
+        if (PlayerStats.Instance.currentLifeTime >= PlayerStats.Instance.maxLifeTimeCap)
+        {
+            if (xpOrbPrefab != null)
+                Object.Instantiate(xpOrbPrefab, transform.position, Quaternion.identity);
         }
 
         if (_anim != null && isDead == true)

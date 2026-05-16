@@ -10,7 +10,7 @@ public abstract class WeaponBase : MonoBehaviour
     [Header("무기 기본 수치")]
     [SerializeField] protected float baseDamage;
     [SerializeField] protected float fireInterval;          // 발동 주기 (초)
-    [SerializeField, Range(1, 3)] protected int weaponLevel = 1;
+    [Range(1, 3)] public static int weaponLevel = 1;
 
     protected const int MaxLevel = 3;
     protected float fireTimer;

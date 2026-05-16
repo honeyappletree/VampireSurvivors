@@ -288,21 +288,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be766a65b6cbff42894f637a78296d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLifeTime: 120
-  maxLifeTimeCap: 90
+  maxLifeTime: 40
+  maxLifeTimeCap: 60
   lifeTimeDecreaseRate: 0.333
   timeRewardPerKill: 3
   currentLifeTime: 0
   invincibleDuration: 0.5
   xpToNextLevel: 50
   xpScaleFactor: 1.4
-  level: 1
   currentXP: 0
   moveSpeed: 5
   attackDamage: 20
   attackFireRate: 1
   projectileSpeed: 8
-  killCount: 0
 --- !u!114 &1638017993799711882
 MonoBehaviour:
   m_ObjectHideFlags: 0

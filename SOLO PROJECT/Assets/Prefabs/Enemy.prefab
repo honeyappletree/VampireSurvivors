@@ -225,6 +225,6 @@ MonoBehaviour:
   moveSpeed: 1.25
   contactDamagePerSec: 20
   timeReward: 5
-  xpOrbPrefab: {fileID: 0}
-  blackManaPrefab: {fileID: 0}
+  xpOrbPrefab: {fileID: 1253165433711719813, guid: 49c91e58196011d42adc154248e0a0a2, type: 3}
+  blackManaPrefab: {fileID: 2301948560124837651, guid: c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6, type: 3}
   dropHealAmount: 3

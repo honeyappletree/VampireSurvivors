@@ -2112,7 +2112,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC0DD\uBA85\uC720\uC9C0: 120s"
+  m_text: "\uC0DD\uBA85\uC720\uC9C0: 40s"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3aae3c7b9c795d0408f41482041b3857, type: 2}
   m_sharedMaterial: {fileID: -4167942368698728764, guid: 3aae3c7b9c795d0408f41482041b3857, type: 2}
@@ -4894,9 +4894,21 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3173377827053540040, guid: f4858c5d4a8d5ba458f72869acf19e7b, type: 3}
+      propertyPath: maxLifeTime
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3173377827053540040, guid: f4858c5d4a8d5ba458f72869acf19e7b, type: 3}
       propertyPath: xpToNextLevel
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 3173377827053540040, guid: f4858c5d4a8d5ba458f72869acf19e7b, type: 3}
+      propertyPath: maxLifeTimeCap
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4400000000000000001, guid: f4858c5d4a8d5ba458f72869acf19e7b, type: 3}
+      propertyPath: darkBoltPrefab
+      value: 
+      objectReference: {fileID: 859623538573680625, guid: 408a32365ee12314f9319e06db7e5dd5, type: 3}
     - target: {fileID: 6394438720815389457, guid: f4858c5d4a8d5ba458f72869acf19e7b, type: 3}
       propertyPath: m_Size.x
       value: 4.984375

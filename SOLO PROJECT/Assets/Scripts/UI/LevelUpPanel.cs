@@ -20,9 +20,9 @@ public class LevelUpPanel : MonoBehaviour
 
     static readonly WeaponCardData[] Cards = new WeaponCardData[]
     {
-        new WeaponCardData("회전 오브",   "플레이어 주변을 공전하며\n닿는 적에게 피해 (데미지 15)",   typeof(RotatingOrb)),
-        new WeaponCardData("관통 볼트",   "적을 최대 3명 관통하는\n직선 투사체 발사 (데미지 20)",      typeof(PiercingBolt)),
-        new WeaponCardData("유도 미사일", "가장 가까운 적을 추적하는\n미사일 발사 (데미지 25)",         typeof(HomingMissile)),
+        new WeaponCardData("Dark Bolt",   "가장 가까운 적을 조준해\n탄환을 발사하여 피해를 가함" + "(데미지 " + DarkBolt.damageLevels[DarkBolt.weaponLevel] + ")",typeof(DarkBolt)),
+        new WeaponCardData("Poison Cloud",   "플레이어 위치에 독가스를 방출해\n범위 내 적에게 지속 독 피해 부여 (데미지 8)",      typeof(PoisonCloud)),
+        new WeaponCardData("Collapse Edge", "플레이어 전방 부채꼴 범위의\n적을 베어 광역 피해를 가함 (데미지 30)",         typeof(CollapseEdge)),
     };
 
     void Awake()

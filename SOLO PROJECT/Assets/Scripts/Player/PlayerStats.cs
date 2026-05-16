@@ -10,8 +10,8 @@ public class PlayerStats : MonoBehaviour
 
     // ── 죽음 유예 시스템 ──────────────────────────────────────
     [Header("생명 유지 시간 (죽음 유예)")]
-    public float maxLifeTime = 60f;             // 최대 생명유지시간 (초)
-    public float maxLifeTimeCap = 90f;          // 생명유지시간 절대 상한선 (초)
+    public float maxLifeTime = 40f;             // 최대 생명유지시간 (초)
+    public float maxLifeTimeCap = 60f;          // 생명유지시간 절대 상한선 (초)
     public float lifeTimeDecreaseRate = 0.333f;  // 3초당 1 감소
     public float timeRewardPerKill = 5f;        // 언데드 처치 시 회복량
     [HideInInspector] public float currentLifeTime;
@@ -67,7 +67,7 @@ public class PlayerStats : MonoBehaviour
 
         // 생명 유지 시간 지속 감소
         currentLifeTime -= lifeTimeDecreaseRate * Time.deltaTime;
-        Debug.Log("player의 currentTime: " + currentLifeTime);
+        //Debug.Log("player의 currentTime: " + currentLifeTime);
         if (currentLifeTime <= 0f)
         {
             currentLifeTime = 0f;
@@ -109,7 +109,6 @@ public class PlayerStats : MonoBehaviour
         if (currentLifeTime <= 0f)
         {
             currentLifeTime = 0f;
-            Debug.Log("GameOver!");
             GameManager.Instance.TriggerGameOver();
         }
     }
@@ -125,10 +124,6 @@ public class PlayerStats : MonoBehaviour
             level++;
             OnLevelUp?.Invoke(level);
             GameManager.Instance.TriggerLevelUp();
-        }
-        if(level >= 3)
-        {
-            
         }
     }
 

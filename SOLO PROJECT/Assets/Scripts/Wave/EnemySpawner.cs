@@ -118,7 +118,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemies(int count, int wave)
     {
-        count = 60;
+        count = 10;
         enemySpawned = true;
         if (PlayerStats.Instance == null) return;
         Vector2 playerPos = PlayerStats.Instance.transform.position;
@@ -138,8 +138,6 @@ public class EnemySpawner : MonoBehaviour
             Enemy enemy = obj.GetComponent<Enemy>();
             enemy?.Init(wave);
         }
-
-        Destroy(enemyPrefab, 30f);
     }
 
 #if UNITY_EDITOR

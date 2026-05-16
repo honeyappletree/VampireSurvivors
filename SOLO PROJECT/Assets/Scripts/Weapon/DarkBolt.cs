@@ -2,17 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// MVP 무기 1 : 회전형 광역 오브
+/// MVP 무기 1 : Dark Bolt
 /// - 플레이어 주위를 공전하며 닿는 적에게 주기적으로 피해를 줌
 /// - 실제 충돌 판정은 OrbHitbox(동일 파일)가 담당
 /// - 같은 적에게 fireInterval(0.5초)마다 한 번만 피해를 줌
 ///
 /// 레벨업 수치
-///   Lv.1 : 오브 1개, 데미지 15
-///   Lv.2 : 오브 2개, 데미지 18
-///   Lv.3 : 오브 3개, 데미지 22
+///   Lv.1 : 오브 1개, 데미지 20
+///   Lv.2 : 오브 2개, 데미지 30
+///   Lv.3 : 오브 3개, 데미지 40
 /// </summary>
-public class RotatingOrb : WeaponBase
+public class DarkBolt : WeaponBase
 {
     [Header("회전 오브 설정")]
     [SerializeField] private float orbitRadius       = 1.5f;  // 공전 반지름
@@ -20,8 +20,8 @@ public class RotatingOrb : WeaponBase
     [SerializeField] private float orbColliderRadius = 0.3f;  // 오브 충돌 반지름
 
     [Header("레벨별 수치")]
-    [SerializeField] private float[] damageLevels   = { 15f, 18f, 22f };
-    [SerializeField] private int[]   orbCountLevels = { 1, 2, 3 };
+    public static float[] damageLevels   = { 20f, 30f, 40f }; //레벨업 수치별 데미지
+    [SerializeField] private int[]   orbCountLevels = { 1, 2, 3 }; //레벨업 수치별 오브 개수
 
     private float currentAngle;
     private List<OrbHitbox> orbObjects = new();
@@ -29,7 +29,7 @@ public class RotatingOrb : WeaponBase
     // 적별 히트 쿨다운 (같은 적에게 중복 피해 방지)
     private Dictionary<Enemy, float> hitCooldowns = new();
 
-    public override string WeaponName => "회전 오브";
+    public override string WeaponName => "Dark Bolt";
 
     // ── 라이프사이클 ──────────────────────────────────────────
 
@@ -58,6 +58,7 @@ public class RotatingOrb : WeaponBase
     {
         int idx    = Mathf.Clamp(weaponLevel - 1, 0, damageLevels.Length - 1);
         baseDamage = damageLevels[idx];
+        Debug.Log(baseDamage);
         SpawnOrbs(orbCountLevels[idx]);
     }
 
@@ -126,9 +127,9 @@ public class RotatingOrb : WeaponBase
 [RequireComponent(typeof(CircleCollider2D))]
 public class OrbHitbox : MonoBehaviour
 {
-    private RotatingOrb owner;
+    private DarkBolt owner;
 
-    public void Init(RotatingOrb owner, float radius)
+    public void Init(DarkBolt owner, float radius)
     {
         this.owner = owner;
 

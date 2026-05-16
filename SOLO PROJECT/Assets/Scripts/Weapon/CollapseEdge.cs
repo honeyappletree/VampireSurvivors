@@ -1,16 +1,16 @@
 using UnityEngine;
 
 /// <summary>
-/// MVP 무기 3 : 유도형 추적 미사일
+/// MVP 무기 3 : Collapse Edge
 /// - 발사 시점의 가장 가까운 적을 타겟으로 설정하고 추적
 /// - 미사일 발사체(MissileProjectile)는 동일 파일에 정의
 ///
 /// 레벨업 수치
-///   Lv.1 : 데미지 25, 속도 6
-///   Lv.2 : 데미지 35, 속도 7
-///   Lv.3 : 데미지 48, 속도 8.5
+///   Lv.1 : 데미지 30, 속도 6
+///   Lv.2 : 데미지 42, 속도 7
+///   Lv.3 : 데미지 80, 속도 8.5
 /// </summary>
-public class HomingMissile : WeaponBase
+public class CollapseEdge : WeaponBase
 {
     [Header("유도 미사일 설정")]
     [SerializeField] private float missileSpeed   = 6f;
@@ -18,8 +18,8 @@ public class HomingMissile : WeaponBase
     [SerializeField] private float colliderRadius = 0.2f;
 
     [Header("레벨별 수치")]
-    [SerializeField] private float[] damageLevels = { 25f, 35f, 48f };
-    [SerializeField] private float[] speedLevels  = { 6f, 7f, 8.5f };
+    [SerializeField] private float[] damageLevels = { 20f, 30f, 40f }; //레벨업 수치별 데미지
+    [SerializeField] private float[] speedLevels  = { 6f, 7f, 8.5f }; //레벨업 수치별 속도
 
     public override string WeaponName => "유도 미사일";
 
